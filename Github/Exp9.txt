@@ -1,0 +1,72 @@
+SOFTWARE & HARDWARE REQUIREMENTS:
+
+ Processor: i3/i5/i7
+ Software: Python ( Jupyter Notebook) or java
+
+Procedure-
+1. Set up a communication system consisting of a transmitter, a channel, and a receiver. The
+transmitter should generate a sequence of bits and modulate them using BPSK modulation. The
+channel should add noise to the signal according to the AWGN model. The receiver should
+demodulate the signal and decode the received symbols back to bits.
+2. Set the signal-to-noise ratio (SNR) to a desired value, e.g., 10 dB. You can use a signal
+generator and a noise generator to simulate the transmitted signal and the noise, respectively.
+Alternatively, you can use a hardware transmitter and receiver and set the SNR by adjusting the
+power levels of the transmitted and received signals.
+3. Transmit a large number of bits, e.g., one million. Measure the bit error rate (BER) by
+comparing the received bits to the transmitted bits and counting the number of errors. The BER
+can be expressed as the ratio of the number of errors to the total number of bits transmitted.
+4. Repeat step 3 for different values of SNR, e.g., 5 dB, 0 dB, -5 dB, etc. Plot the BER as a
+function of SNR. You should observe that the BER decreases as the SNR increases, and
+eventually approaches zero as the SNR becomes very large.
+5. Compare your results to the theoretical BER curve for BPSK modulation in the presence
+of AWGN, which is given by the formula:
+BER = 0.5*erfc(sqrt(SNR))
+where erfc is the complementary error function and SNR is the signal-to-noise ratio in linear
+scale (not dB).
+You can use this formula to calculate the expected BER for different values of SNR and compare
+it to your measured BER. You should observe good agreement between theory and experiment
+for high SNR values, but some deviation for low SNR values due to the statistical nature of the
+noise. you can gain a better understanding of the effects of noise on digital communication
+systems and how the BER depends on the SNR. This can be useful for designing and optimizing
+communication systems for different noise environments.
+
+
+
+
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Set the parameters
+n_bits = 1000000  # Number of bits to be transmitted
+SNRdBs = np.arange(-10, 11, 1)  # SNR range in dB
+SNRs = 10 ** (SNRdBs / 10)  # SNR range in linear scale
+
+# Generate random bits
+bits = np.random.randint(0, 2, n_bits)
+
+# Loop over SNR values
+BERs = []
+for SNR in SNRs:
+    # BPSK modulation
+    symbols = 2 * bits - 1
+    
+    # Add noise
+    noise_power = 1 / SNR
+    noise = np.sqrt(noise_power) * np.random.randn(n_bits)
+    received = symbols + noise
+    
+    # BPSK demodulation
+    decoded_bits = (received >= 0).astype(int)
+    
+    # Calculate the bit error rate
+    BER = np.sum(bits != decoded_bits) / n_bits
+    BERs.append(BER)
+
+# Plot the results
+plt.semilogy(SNRdBs, BERs)
+plt.xlabel('SNR (dB)')
+plt.ylabel('Bit Error Rate')
+plt.title('Bit Error Rate vs. SNR for BPSK modulation with AWGN')
+plt.grid(True)
+plt.show()
