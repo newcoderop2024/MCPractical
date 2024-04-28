@@ -1,0 +1,66 @@
+make setup
+router -1841
+server
+switch -2950-24
+two pc
+
+start connection -from top to bottom 
+
+click on router
+
+enable port 0/1-
+ip-192.168.10.1
+subnet-255.255.255.0
+
+enable port 0/0-
+ip-10.10.10.1
+subnet-255.255.255.0
+
+assign ip to pc-
+
+pc0-
+
+ip-192.168.10.2
+subnet-255.255.255.0
+default gateway-192.168.10.1
+
+pc-1
+ip-192.168.10.3
+subnet-255.255.255.0
+default gateway-192.168.10.1
+
+server-
+
+ip-10.10.10.2
+subnet-255.255.255.0
+default gateway-10.10.10.1
+
+
+change server name-FTP Server
+
+services-ftp username pass add
+
+create testing file-
+
+save it
+
+go cmd prmpt
+
+ping 10.10.10.2
+
+ftp 10.10.10.2
+
+give usname pass
+
+put hello.txt
+
+dir-to check files
+
+for downloading file- go to next pc
+
+pc1-
+cmd prmpt
+
+ftp 10.10.10.2
+give usname,pass
+get hello.txt
