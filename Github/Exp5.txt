@@ -1,0 +1,62 @@
+setup -
+server -pt
+
+switch-2950-24
+
+3 pc
+
+1-server-desktop- ip
+
+2-ipv4-192.168.10.1
+subnet mask-255.255.255.0
+dns gateway -192.168.10.1
+dns server-8.8.8.8
+
+config-dhcp server
+
+services -dhcp-
+max users 4-
+
+
+pc0 -
+cmd script-
+ping 192.168.10.1
+
+ip config
+
+
+
+manual-
+
+ip-
+ipv4-192.168.10.1
+subnet mask-255.255.255.0
+default gateway -192.168.10.1
+dns-8.8.8.8
+
+start ip- last 3 or 0
+
+maximum devices - 4
+
+
+verify-
+
+msg pdu
+
+add any two
+
+
+for two final----
+
+
+setup 
+use - ip -192.168.10.1
+dns gateway-192.168.10.1
+dns server-8.8.8.8 or default
+
+
+
+turn on
+
+
+
